@@ -1,0 +1,11 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo "Deploying Glue script from MAIN branch"
+      - aws s3 cp glue/user_events_etl.py "s3://${SCRIPTS_BUCKET}/glue-scripts/main/user_events_etl.py"
+      - echo "Prod job is triggered by schedule and/or S3 upload event - not starting here."
+artifacts:
+  files:
+    - "**/*"
