@@ -1,0 +1,12 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo "Deploying Glue script from TEST branch"
+      - aws s3 cp glue/user_events_etl.py "s3://${SCRIPTS_BUCKET}/glue-scripts/test/user_events_etl.py"
+      - echo "Starting TEST Glue job one time..."
+      - aws glue start-job-run --job-name "${GLUE_JOB_NAME}"
+artifacts:
+  files:
+    - "**/*"
